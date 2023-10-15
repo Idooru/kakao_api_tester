@@ -24,6 +24,7 @@ public class SearchAPIService {
         String keyword = searchRequestDto.getKeyword();
         int radius = searchRequestDto.getRadius();
         int size = searchRequestDto.getSize();
+        int page = searchRequestDto.getPage();
 
         UriComponents uri = UriComponentsBuilder.fromHttpUrl("https://dapi.kakao.com/v2/local/search/keyword.json")
                 .queryParam("y", y)
@@ -31,6 +32,7 @@ public class SearchAPIService {
                 .queryParam("query", keyword)
                 .queryParam("radius", radius)
                 .queryParam("size", size)
+                .queryParam("page", page)
                 .queryParam("category_group_code", "FD6")
                 .build();
 

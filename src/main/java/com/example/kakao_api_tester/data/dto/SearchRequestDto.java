@@ -9,6 +9,7 @@ public class SearchRequestDto {
     public String keyword;
     public int radius;
     public int size;
+    public int page;
 
     public void validateDto() {
         if (keyword.isEmpty()) {

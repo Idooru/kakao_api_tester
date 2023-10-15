@@ -14,6 +14,7 @@ public class HttpTransactionLogger {
         System.out.println("[키워드]: " + dto.getKeyword());
         System.out.println("[반경]: " + dto.getRadius());
         System.out.println("[식당 개수]: " + dto.getSize());
+        System.out.println("[페이지 개수]: " + dto.getPage());
     }
 
     public void logResponseJson(SearchResponseJSON json) {
