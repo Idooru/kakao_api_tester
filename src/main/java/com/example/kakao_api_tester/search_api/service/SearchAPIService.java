@@ -7,7 +7,6 @@ import com.example.kakao_api_tester.data.type.SearchResponseJSON;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,52 +22,31 @@ public class SearchAPIService {
         String x = searchRequestDto.getX();
         String y = searchRequestDto.getY();
         String keyword = searchRequestDto.getKeyword();
+        int radius = searchRequestDto.getRadius();
+        int size = searchRequestDto.getSize();
 
         UriComponents uri = UriComponentsBuilder.fromHttpUrl("https://dapi.kakao.com/v2/local/search/keyword.json")
                 .queryParam("y", y)
                 .queryParam("x", x)
-                .queryParam("radius", 20000)
-                .queryParam("size", 10)
                 .queryParam("query", keyword)
-                .queryParam("page", 45)
+                .queryParam("radius", radius)
+                .queryParam("size", size)
+                .queryParam("category_group_code", "FD6")
                 .build();
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "KakaoAK e2a97497252d13a304751d99a85ea67c");
 
-        SearchResponseJSON json;
-
-        try {
-            json = restTemplate.exchange(uri.toUriString(), HttpMethod.GET, new HttpEntity<>(headers), SearchResponseJSON.class).getBody();
-        } catch (HttpClientErrorException exception) {
-            json = null;
-        }
-
-        return json;
+        return restTemplate.exchange(uri.toUriString(), HttpMethod.GET, new HttpEntity<>(headers), SearchResponseJSON.class).getBody();
     }
 
     public ResponseEntity<SearchResponseDto<SearchResponseJSON>> buildResponse(SearchResponseJSON json) {
-        SearchResponseDto<SearchResponseJSON> build;
-        ResponseEntity<SearchResponseDto<SearchResponseJSON>> responseEntity;
+        SearchResponseDto<SearchResponseJSON> response = searchResponseBuilder
+                .setSuccess(true)
+                .setMessage("성공입니다.")
+                .setResult(json)
+                .build();
 
-        if (json != null) {
-            build = searchResponseBuilder
-                    .setSuccess(true)
-                    .setMessage("성공입니다.")
-                    .setResult(json)
-                    .build();
-
-            responseEntity = new ResponseEntity<SearchResponseDto<SearchResponseJSON>>(build, HttpStatusCode.valueOf(200));
-        } else {
-            build = searchResponseBuilder
-                    .setSuccess(false)
-                    .setMessage("실패입니다.")
-                    .setResult(null)
-                    .build();
-
-            responseEntity = new ResponseEntity<SearchResponseDto<SearchResponseJSON>>(build, HttpStatusCode.valueOf(400));
-        }
-
-        return responseEntity;
+        return new ResponseEntity<>(response, HttpStatusCode.valueOf(200));
     }
 }
