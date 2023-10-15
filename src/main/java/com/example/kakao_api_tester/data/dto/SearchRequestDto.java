@@ -27,9 +27,14 @@ public class SearchRequestDto {
         if (1 > size || 15 < size) {
             throw new Error("식당 개수의 범위를 충족시키지 못했습니다.");
         }
+        
+        if (1 > page || 45 < page) {
+            throw new Error("페이지 개수의 범위를 충족시키지 못했습니다.");
+        }
+
     }
 
     private boolean isValidKeyword(String keyword) {
-        return keyword.matches("한식|중식|일식|양식");
+        return keyword.matches("음식점|한식|중식|일식|양식");
     }
 }
