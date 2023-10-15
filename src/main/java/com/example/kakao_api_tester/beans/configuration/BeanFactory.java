@@ -1,4 +1,4 @@
-package com.example.kakao_api_tester.dependency;
+package com.example.kakao_api_tester.beans.configuration;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
 package com.example.kakao_api_tester.search_api.service;
 
-import com.example.kakao_api_tester.data.components.SearchResponseBuilder;
+import com.example.kakao_api_tester.beans.components.SearchResponseBuilder;
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
 import com.example.kakao_api_tester.data.type.SearchResponseJSON;

@@ -1,6 +1,6 @@
 package com.example.kakao_api_tester.search_api.controller;
 
-import com.example.kakao_api_tester.data.components.HttpTransactionLogger;
+import com.example.kakao_api_tester.beans.components.HttpTransactionLogger;
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
 import com.example.kakao_api_tester.data.type.SearchResponseJSON;
