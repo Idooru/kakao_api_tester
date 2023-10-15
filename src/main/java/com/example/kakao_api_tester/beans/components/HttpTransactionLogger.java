@@ -19,6 +19,7 @@ public class HttpTransactionLogger {
 
     public void logResponseJson(SearchResponseJSON json) {
         System.out.println("검색 응답 데이터");
+        System.out.println("[총 응답 개수]: " + json.documents.size());
         json.documents.forEach((shop) -> System.out.println("[식당 정보]: " + shop));
     }
 }
