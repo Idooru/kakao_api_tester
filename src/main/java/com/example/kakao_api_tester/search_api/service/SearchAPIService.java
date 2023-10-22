@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SearchAPIService {
 
     private final RestTemplate restTemplate;
+    private final HttpHeaders httpHeaders;
     private final SearchResponseBuilder<SearchResponseJSON> searchResponseBuilder;
 
     public SearchResponseJSON callSearchAPI(SearchRequestDto searchRequestDto) {
@@ -36,10 +37,9 @@ public class SearchAPIService {
                 .queryParam("category_group_code", "FD6")
                 .build();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "KakaoAK e2a97497252d13a304751d99a85ea67c");
+        httpHeaders.set("Authorization", "KakaoAK e2a97497252d13a304751d99a85ea67c");
 
-        return restTemplate.exchange(uri.toUriString(), HttpMethod.GET, new HttpEntity<>(headers), SearchResponseJSON.class).getBody();
+        return restTemplate.exchange(uri.toUriString(), HttpMethod.GET, new HttpEntity<>(httpHeaders), SearchResponseJSON.class).getBody();
     }
 
     public ResponseEntity<SearchResponseDto<SearchResponseJSON>> buildResponse(SearchResponseJSON json) {
