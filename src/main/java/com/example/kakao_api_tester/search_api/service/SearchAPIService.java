@@ -1,5 +1,6 @@
 package com.example.kakao_api_tester.search_api.service;
 
+import com.example.kakao_api_tester.beans.components.RestTemplateRequestBuilder;
 import com.example.kakao_api_tester.beans.components.SearchResponseBuilder;
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
@@ -15,9 +16,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 public class SearchAPIService {
 
-    private final RestTemplate restTemplate;
     private final HttpHeaders httpHeaders;
     private final SearchResponseBuilder<SearchResponseJSON> searchResponseBuilder;
+    private final RestTemplateRequestBuilder<SearchResponseJSON> requestBuilder;
 
     public SearchResponseJSON callSearchAPI(SearchRequestDto searchRequestDto) {
         String x = searchRequestDto.getX();
@@ -39,7 +40,12 @@ public class SearchAPIService {
 
         httpHeaders.set("Authorization", "KakaoAK e2a97497252d13a304751d99a85ea67c");
 
-        return restTemplate.exchange(uri.toUriString(), HttpMethod.GET, new HttpEntity<>(httpHeaders), SearchResponseJSON.class).getBody();
+        return requestBuilder
+                .setUri(uri.toUriString())
+                .setHttpMethod(HttpMethod.GET)
+                .setHttpEntity(new HttpEntity<>(httpHeaders))
+                .setType(SearchResponseJSON.class)
+                .build();
     }
 
     public ResponseEntity<SearchResponseDto<SearchResponseJSON>> buildResponse(SearchResponseJSON json) {
