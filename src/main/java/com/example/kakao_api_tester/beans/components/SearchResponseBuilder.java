@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchResponseBuilder<T> {
 
-    public boolean success;
-    public String message;
-    public T result;
+    private boolean success;
+    private String message;
+    private T result;
 
 
     public SearchResponseBuilder<T> setSuccess(boolean success) {
