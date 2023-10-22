@@ -1,10 +1,8 @@
 package com.example.kakao_api_tester.beans.components;
 
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@NoArgsConstructor
 @Component
 public class SearchResponseBuilder<T> {
 
