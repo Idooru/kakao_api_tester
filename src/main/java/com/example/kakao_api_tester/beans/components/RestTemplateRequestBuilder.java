@@ -1,6 +1,6 @@
 package com.example.kakao_api_tester.beans.components;
 
-import com.example.kakao_api_tester.data.type.SearchResponseJSON;
+import com.example.kakao_api_tester.data.type.KakaoLocalResponseJSON;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -38,8 +38,8 @@ public class RestTemplateRequestBuilder<T> {
         return this;
     }
 
-    public SearchResponseJSON build() {
-        return (SearchResponseJSON) restTemplate.exchange(uri, httpMethod, httpEntity, type).getBody();
+    public KakaoLocalResponseJSON build() {
+        return (KakaoLocalResponseJSON) restTemplate.exchange(uri, httpMethod, httpEntity, type).getBody();
     }
 
 }

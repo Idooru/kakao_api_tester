@@ -2,9 +2,9 @@ package com.example.kakao_api_tester.data.type;
 
 import java.util.List;
 
-public class SearchResponseJSON {
+public class KakaoLocalResponseJSON {
 
-    public static class SearchResponseKey {
+    public static class ShopInfo {
         public String address_name;
         public String category_group_code;
         public String category_group_name;
@@ -20,7 +20,7 @@ public class SearchResponseJSON {
 
         @Override
         public String toString() {
-            return "SearchResponseKey{" +
+            return "ShopInfo{" +
                     "address_name='" + address_name + '\'' +
                     ", category_group_code='" + category_group_code + '\'' +
                     ", category_group_name='" + category_group_name + '\'' +
@@ -37,5 +37,5 @@ public class SearchResponseJSON {
         }
     }
 
-    public List<SearchResponseKey> documents;
+    public List<ShopInfo> documents;
 }

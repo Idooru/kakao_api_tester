@@ -3,7 +3,7 @@ package com.example.kakao_api_tester.search_api.controller;
 import com.example.kakao_api_tester.beans.components.HttpTransactionLogger;
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
-import com.example.kakao_api_tester.data.type.SearchResponseJSON;
+import com.example.kakao_api_tester.data.type.KakaoLocalResponseJSON;
 import com.example.kakao_api_tester.search_api.service.SearchAPIService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +21,11 @@ public class SearchAPIController {
     private final HttpTransactionLogger logger;
 
     @GetMapping(value = "/search-api")
-    public ResponseEntity<SearchResponseDto<SearchResponseJSON>> searchApi(SearchRequestDto searchRequestDto) {
+    public ResponseEntity<SearchResponseDto<KakaoLocalResponseJSON>> searchApi(SearchRequestDto searchRequestDto) {
         logger.logRequestDto(searchRequestDto);
         searchRequestDto.validateDto();
 
-        SearchResponseJSON searchResponseJSON = searchAPIService.callSearchAPI(searchRequestDto);
+        KakaoLocalResponseJSON searchResponseJSON = searchAPIService.callSearchAPI(searchRequestDto);
         logger.logResponseJson(searchResponseJSON);
 
         return searchAPIService.buildResponse(searchResponseJSON);

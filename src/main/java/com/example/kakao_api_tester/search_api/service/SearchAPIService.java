@@ -4,11 +4,10 @@ import com.example.kakao_api_tester.beans.components.RestTemplateRequestBuilder;
 import com.example.kakao_api_tester.beans.components.SearchResponseBuilder;
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
-import com.example.kakao_api_tester.data.type.SearchResponseJSON;
+import com.example.kakao_api_tester.data.type.KakaoLocalResponseJSON;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,10 +16,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SearchAPIService {
 
     private final HttpHeaders httpHeaders;
-    private final SearchResponseBuilder<SearchResponseJSON> searchResponseBuilder;
-    private final RestTemplateRequestBuilder<SearchResponseJSON> requestBuilder;
+    private final SearchResponseBuilder<KakaoLocalResponseJSON> searchResponseBuilder;
+    private final RestTemplateRequestBuilder<KakaoLocalResponseJSON> requestBuilder;
 
-    public SearchResponseJSON callSearchAPI(SearchRequestDto searchRequestDto) {
+    public KakaoLocalResponseJSON callSearchAPI(SearchRequestDto searchRequestDto) {
         String x = searchRequestDto.getX();
         String y = searchRequestDto.getY();
         String keyword = searchRequestDto.getKeyword();
@@ -44,12 +43,12 @@ public class SearchAPIService {
                 .setUri(uri.toUriString())
                 .setHttpMethod(HttpMethod.GET)
                 .setHttpEntity(new HttpEntity<>(httpHeaders))
-                .setType(SearchResponseJSON.class)
+                .setType(KakaoLocalResponseJSON.class)
                 .build();
     }
 
-    public ResponseEntity<SearchResponseDto<SearchResponseJSON>> buildResponse(SearchResponseJSON json) {
-        SearchResponseDto<SearchResponseJSON> response = searchResponseBuilder
+    public ResponseEntity<SearchResponseDto<KakaoLocalResponseJSON>> buildResponse(KakaoLocalResponseJSON json) {
+        SearchResponseDto<KakaoLocalResponseJSON> response = searchResponseBuilder
                 .setSuccess(true)
                 .setMessage("성공입니다.")
                 .setResult(json)

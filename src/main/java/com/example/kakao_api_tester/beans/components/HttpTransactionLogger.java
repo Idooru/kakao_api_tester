@@ -1,7 +1,7 @@
 package com.example.kakao_api_tester.beans.components;
 
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
-import com.example.kakao_api_tester.data.type.SearchResponseJSON;
+import com.example.kakao_api_tester.data.type.KakaoLocalResponseJSON;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,7 +17,7 @@ public class HttpTransactionLogger {
         System.out.println("[페이지 개수]: " + dto.getPage());
     }
 
-    public void logResponseJson(SearchResponseJSON json) {
+    public void logResponseJson(KakaoLocalResponseJSON json) {
         System.out.println("검색 응답 데이터");
         System.out.println("[총 응답 개수]: " + json.documents.size());
         json.documents.forEach((shop) -> System.out.println("[식당 정보]: " + shop));
