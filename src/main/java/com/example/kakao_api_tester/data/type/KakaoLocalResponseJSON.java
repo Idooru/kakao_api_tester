@@ -37,5 +37,6 @@ public class KakaoLocalResponseJSON {
         }
     }
 
+    public String keyword;
     public List<ShopInfo> documents;
 }
