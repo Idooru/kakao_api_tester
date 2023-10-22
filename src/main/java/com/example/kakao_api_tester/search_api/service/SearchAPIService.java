@@ -4,7 +4,7 @@ import com.example.kakao_api_tester.beans.components.SearchResponseBuilder;
 import com.example.kakao_api_tester.data.dto.SearchRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
 import com.example.kakao_api_tester.data.type.SearchResponseJSON;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SearchAPIService {
 
     private final RestTemplate restTemplate;
