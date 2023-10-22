@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8081"})
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8081")
 public class SearchAPIController {
 
     private final SearchAPIService searchAPIService;
