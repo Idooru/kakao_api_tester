@@ -39,12 +39,16 @@ public class SearchAPIService {
 
         httpHeaders.set("Authorization", "KakaoAK e2a97497252d13a304751d99a85ea67c");
 
-        return requestBuilder
+        final KakaoLocalResponseJSON build = requestBuilder
                 .setUri(uri.toUriString())
                 .setHttpMethod(HttpMethod.GET)
                 .setHttpEntity(new HttpEntity<>(httpHeaders))
                 .setType(KakaoLocalResponseJSON.class)
                 .build();
+
+        build.keyword = keyword;
+
+        return build;
     }
 
     public ResponseEntity<SearchResponseDto<KakaoLocalResponseJSON>> buildResponse(KakaoLocalResponseJSON json) {
