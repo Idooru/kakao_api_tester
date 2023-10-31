@@ -2,7 +2,10 @@ package com.example.kakao_api_tester.data.type;
 
 import java.util.List;
 
-public class KakaoLocalResponseJSON {
+public class KeywordResponseJson {
+
+    public String keyword;
+    public List<ShopInfo> documents;
 
     public static class ShopInfo {
         public String address_name;
@@ -36,7 +39,4 @@ public class KakaoLocalResponseJSON {
                     '}';
         }
     }
-
-    public String keyword;
-    public List<ShopInfo> documents;
 }

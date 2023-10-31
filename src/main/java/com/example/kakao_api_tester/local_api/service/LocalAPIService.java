@@ -1,10 +1,10 @@
-package com.example.kakao_api_tester.search_api.service;
+package com.example.kakao_api_tester.local_api.service;
 
 import com.example.kakao_api_tester.beans.components.RestTemplateRequestBuilder;
 import com.example.kakao_api_tester.beans.components.SearchResponseBuilder;
-import com.example.kakao_api_tester.data.dto.SearchRequestDto;
+import com.example.kakao_api_tester.data.dto.KeywordRequestDto;
 import com.example.kakao_api_tester.data.dto.SearchResponseDto;
-import com.example.kakao_api_tester.data.type.KakaoLocalResponseJSON;
+import com.example.kakao_api_tester.data.type.KeywordResponseJson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -13,19 +13,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @RequiredArgsConstructor
-public class SearchAPIService {
+public class LocalAPIService {
 
     private final HttpHeaders httpHeaders;
-    private final SearchResponseBuilder<KakaoLocalResponseJSON> searchResponseBuilder;
-    private final RestTemplateRequestBuilder<KakaoLocalResponseJSON> requestBuilder;
+    private final SearchResponseBuilder<KeywordResponseJson> searchResponseBuilder;
+    private final RestTemplateRequestBuilder<KeywordResponseJson> requestBuilder;
 
-    public KakaoLocalResponseJSON callSearchAPI(SearchRequestDto searchRequestDto) {
-        String x = searchRequestDto.getX();
-        String y = searchRequestDto.getY();
-        String keyword = searchRequestDto.getKeyword();
-        int radius = searchRequestDto.getRadius();
-        int size = searchRequestDto.getSize();
-        int page = searchRequestDto.getPage();
+    public KeywordResponseJson callKeyword(KeywordRequestDto KeywordRequestDto) {
+        String x = KeywordRequestDto.getX();
+        String y = KeywordRequestDto.getY();
+        String keyword = KeywordRequestDto.getKeyword();
+        int radius = KeywordRequestDto.getRadius();
+        int size = KeywordRequestDto.getSize();
+        int page = KeywordRequestDto.getPage();
 
         UriComponents uri = UriComponentsBuilder.fromHttpUrl("https://dapi.kakao.com/v2/local/search/keyword.json")
                 .queryParam("y", y)
@@ -39,11 +39,11 @@ public class SearchAPIService {
 
         httpHeaders.set("Authorization", "KakaoAK e2a97497252d13a304751d99a85ea67c");
 
-        final KakaoLocalResponseJSON build = requestBuilder
+        final KeywordResponseJson build = requestBuilder
                 .setUri(uri.toUriString())
                 .setHttpMethod(HttpMethod.GET)
                 .setHttpEntity(new HttpEntity<>(httpHeaders))
-                .setType(KakaoLocalResponseJSON.class)
+                .setType(KeywordResponseJson.class)
                 .build();
 
         build.keyword = keyword;
@@ -51,8 +51,8 @@ public class SearchAPIService {
         return build;
     }
 
-    public ResponseEntity<SearchResponseDto<KakaoLocalResponseJSON>> buildResponse(KakaoLocalResponseJSON json) {
-        SearchResponseDto<KakaoLocalResponseJSON> response = searchResponseBuilder
+    public ResponseEntity<SearchResponseDto<KeywordResponseJson>> buildResponse(KeywordResponseJson json) {
+        SearchResponseDto<KeywordResponseJson> response = searchResponseBuilder
                 .setSuccess(true)
                 .setMessage("성공입니다.")
                 .setResult(json)
